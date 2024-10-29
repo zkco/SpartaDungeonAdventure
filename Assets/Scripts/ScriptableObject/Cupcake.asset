@@ -15,4 +15,7 @@ MonoBehaviour:
   ItemName: Cupcake
   ItemDescription: Temporaly healed 20 points
   ItemType: 1
-  UseValue: 20
+  ItemUsuable:
+  - Type: 0
+    Value: 20
+    Time: 0

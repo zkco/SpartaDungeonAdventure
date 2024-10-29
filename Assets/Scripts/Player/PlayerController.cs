@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     [Header("Move")]
     private readonly float _defaultMoveSpeed = 5.0f;
     private readonly float _defaultJumpPower = 10f;
-    private float _speed = 0;
+    public float _speed = 0;
     private Vector2 _inputMovement;
     public LayerMask Ground;
 
@@ -123,7 +123,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (item.ItemType == ItemType.Dura)
                 {
-                    Coroutine coroutine =  StartCoroutine(DuraItemUse(item.ItemUsuable[i]));
+                    Coroutine coroutine = StartCoroutine(DuraItemUse(item.ItemUsuable[i]));
                 }
             }
         }
@@ -132,13 +132,6 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator DuraItemUse(ItemUsuable item) //현재 지속 적용되는 아이템이 속도 밖에 없음
     {
-        float curTime = 0f;
-        curTime += Time.deltaTime;
-        while(curTime <= item.Time)
-        {
-            _speed = item.Value;
-        }
-        _speed = 0;
         yield return null;
     }
 }

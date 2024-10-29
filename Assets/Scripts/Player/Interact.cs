@@ -53,6 +53,7 @@ public class Interact : MonoBehaviour
     }
     private void OnInteract()
     {
+        Debug.Log("interact");
         if (hit.collider.gameObject != null)
         {
             Destroy(hit.collider.gameObject, 0.01f);
