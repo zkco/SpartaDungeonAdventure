@@ -12,6 +12,7 @@ SpartaBootCamp Week 4 Project
 
 2. 체력 UI
 - 2D Sprite 패키지를 이용하여 Filled 타입으로 HP 아이콘에 구현
+- Regen 메소드를 통해서 DeltaTime에 비례하여 회복 기능 추가
 
 3. Raycast를 이용한 환경조사
 - Camera 중앙을 기준으로 1f 길이의 탐색 Ray를 사용하여 해당 범위에 상호작용 가능한 레이어의 물건이 있을 경우 해당 정보를 표시
