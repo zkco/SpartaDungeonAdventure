@@ -132,22 +132,26 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator DuraItemUse() //현재 지속 적용되는 아이템이 속도 밖에 없음
     {
-        if (isDuraitem == true)
+        while (true)
         {
-            ItemUsuable[] item = CharacterManager.Instance.Player.Item.GetComponent<Item>().ItemData.ItemUsuable;
-            for (int i = 0; i < item.Length; i++)
+            if (isDuraitem == true)
             {
-                switch(item[i].Type)
+                ItemUsuable[] item = CharacterManager.Instance.Player.Item.GetComponent<Item>().ItemData.ItemUsuable;
+                for (int i = 0; i < item.Length; i++)
                 {
-                    default:
-                        _defaultMoveSpeed = item[i].Value;
-                        yield return new WaitForSeconds(item[i].Time);
-                        break;
+                    switch (item[i].Type)
+                    {
+                        default:
+                            _defaultMoveSpeed = item[i].Value;
+                            yield return new WaitForSeconds(item[i].Time);
+                            break;
+                    }
                 }
             }
+
+            isDuraitem = false;
+            _defaultMoveSpeed = 5f;
+            yield return null;
         }
-        isDuraitem = false;
-        _defaultMoveSpeed = 5f;
-        yield return null;
     }
 }
