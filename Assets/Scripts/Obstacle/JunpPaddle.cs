@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class JunpPaddle : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collision)
+    // Start is called before the first frame update
+    void Start()
     {
-        Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
-        rb.AddForce(Vector3.up * 10, ForceMode.Impulse);
+        
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
 }
