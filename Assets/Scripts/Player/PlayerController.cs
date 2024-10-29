@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     [Header("Move")]
     private float _defaultMoveSpeed = 5.0f;
     private readonly float _defaultJumpPower = 10f;
+    public float _speed;
     private Vector2 _inputMovement;
     public LayerMask Ground;
 
@@ -52,7 +53,7 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         Vector3 dir = transform.forward * _inputMovement.y + transform.right * _inputMovement.x;
-        dir *= (_defaultMoveSpeed);
+        dir *= (_defaultMoveSpeed + _speed);
         dir.y = _rb.velocity.y;
 
         _rb.velocity = dir;
@@ -142,16 +143,18 @@ public class PlayerController : MonoBehaviour
                     switch (item[i].Type)
                     {
                         default:
-                            _defaultMoveSpeed = item[i].Value;
+                            _speed = item[i].Value;
                             yield return new WaitForSeconds(item[i].Time);
+                            isDuraitem = false;
                             break;
                     }
                 }
             }
-
-            isDuraitem = false;
-            _defaultMoveSpeed = 5f;
-            yield return null;
+            else
+            {
+                _speed = 0f;
+                yield return null;
+            }
         }
     }
 }

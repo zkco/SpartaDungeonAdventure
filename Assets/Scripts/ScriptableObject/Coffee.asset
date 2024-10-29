@@ -17,5 +17,5 @@ MonoBehaviour:
   ItemType: 0
   ItemUsuable:
   - Type: 1
-    Value: 20
+    Value: 5
     Time: 5
