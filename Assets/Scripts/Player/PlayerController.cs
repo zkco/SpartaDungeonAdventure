@@ -130,8 +130,15 @@ public class PlayerController : MonoBehaviour
         _speed = 0f;
     }
 
-    private IEnumerator DuraItemUse(ItemUsuable item)
+    private IEnumerator DuraItemUse(ItemUsuable item) //현재 지속 적용되는 아이템이 속도 밖에 없음
     {
+        float curTime = 0f;
+        curTime += Time.deltaTime;
+        while(curTime <= item.Time)
+        {
+            _speed = item.Value;
+        }
+        _speed = 0;
         yield return null;
     }
 }
