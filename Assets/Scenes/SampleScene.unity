@@ -1849,9 +1849,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2348d54c98800fa4ebc38572b314d1a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _speed: 0
   Ground:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 4294967295
   _camera: {fileID: 724948784}
   Sensitive: 0.1
 --- !u!114 &1911134949

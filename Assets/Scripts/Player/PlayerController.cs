@@ -11,9 +11,8 @@ public class PlayerController : MonoBehaviour
     public event Action OnUseItem;
 
     [Header("Move")]
-    private readonly float _defaultMoveSpeed = 5.0f;
+    private float _defaultMoveSpeed = 5.0f;
     private readonly float _defaultJumpPower = 10f;
-    public float _speed = 0;
     private Vector2 _inputMovement;
     public LayerMask Ground;
 
@@ -24,6 +23,7 @@ public class PlayerController : MonoBehaviour
     private float _camXRot;
     [Range(0f, 5f)] public float Sensitive = 0.1f;
     private Vector2 _mouseDeltaValue;
+    private bool isDuraitem = false;
 
     private Rigidbody _rb;
 
@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         OnUseItem += UseItem;
+        StartCoroutine(DuraItemUse());
     }
 
     private void FixedUpdate()
@@ -51,7 +52,7 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         Vector3 dir = transform.forward * _inputMovement.y + transform.right * _inputMovement.x;
-        dir *= (_defaultMoveSpeed + _speed);
+        dir *= (_defaultMoveSpeed);
         dir.y = _rb.velocity.y;
 
         _rb.velocity = dir;
@@ -123,15 +124,30 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (item.ItemType == ItemType.Dura)
                 {
-                    Coroutine coroutine = StartCoroutine(DuraItemUse(item.ItemUsuable[i]));
+                    isDuraitem = true;
                 }
             }
         }
-        _speed = 0f;
     }
 
-    private IEnumerator DuraItemUse(ItemUsuable item) //현재 지속 적용되는 아이템이 속도 밖에 없음
+    private IEnumerator DuraItemUse() //현재 지속 적용되는 아이템이 속도 밖에 없음
     {
+        if (isDuraitem == true)
+        {
+            ItemUsuable[] item = CharacterManager.Instance.Player.Item.GetComponent<Item>().ItemData.ItemUsuable;
+            for (int i = 0; i < item.Length; i++)
+            {
+                switch(item[i].Type)
+                {
+                    default:
+                        _defaultMoveSpeed = item[i].Value;
+                        yield return new WaitForSeconds(item[i].Time);
+                        break;
+                }
+            }
+        }
+        isDuraitem = false;
+        _defaultMoveSpeed = 5f;
         yield return null;
     }
 }
